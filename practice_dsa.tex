@@ -1,0 +1,114 @@
+\documentclass[a4paper,11pt,twoside,openright]{report}
+
+\usepackage{graphicx}
+%\usepackage{ngerman}
+\usepackage[utf8x]{inputenc}
+\usepackage{fancyvrb}
+\usepackage{courier}
+\usepackage{helvet}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{pdfpages}
+\usepackage[strict]{changepage}
+\usepackage{indentfirst}
+
+\pdfoptionpdfminorversion=6
+
+% \definecolor{se_dark_blue}{RGB}{0,103,166} % powerpoint
+\definecolor{se_dark_blue}{RGB}{0,96,178} % website
+% \definecolor{se_light_blue}{RGB}{119,158,201} % powerpoint
+\definecolor{se_light_blue}{RGB}{129,160,225} % website
+
+
+%% setup listings
+\usepackage{listings}
+\lstset{
+    numbers=left,
+    numberstyle=\tiny,
+    numbersep=5pt,
+    xleftmargin=11pt,
+    xrightmargin=4pt,
+    frame=single,
+    aboveskip=0pt,
+    belowskip=-6pt,
+    sensitive=true,
+    float=!t,
+    breaklines=false,
+    captionpos=b,
+    tabsize=2,
+    showstringspaces=false,
+    basicstyle=\small\ttfamily,
+    morecomment=[l]{//},
+    morecomment=[s][\itshape]{/**}{*/}
+}
+
+\setlength\parindent{24pt}
+
+%% defines the listings laguage named 'MontiArc' derived from the language 'Java' 
+%% adding the below listed keywords. See 
+%% ftp://ftp.tex.ac.uk/tex-archive/macros/latex/contrib/listings/listings.pdf
+%% for listings documentation
+\lstdefinelanguage{MontiArc}[]{Java}{
+  morekeywords={component, port, in, out, inv, package, import, connect, autoconnect}
+}
+
+% Seite einrichten
+\setlength{\voffset}{-1in}
+\setlength{\hoffset}{-1in}
+
+\setlength{\topmargin}{2.5cm}		   
+\setlength{\headheight}{0cm}		   
+\setlength{\headsep}{0cm}		   
+\setlength{\oddsidemargin}{3,3cm}  % innen ein wenig mehr Rand für die Klebebindung
+\setlength{\evensidemargin}{2,7cm} % dafür außen ein wenig weniger
+\setlength{\textwidth}{15cm}		   
+\setlength{\textheight}{23,5cm}		   
+\setlength{\parindent}{0cm}
+
+\newcommand{\emptyLine}{{\LARGE ~\\}}
+
+\begin{document}
+
+% Einrücken von Absätzen verhindern und 1.5 Zeilen Absatzabstand
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.5ex plus0.5ex minus0.5ex}
+
+\renewcommand{\contentsname}{Table of contents}
+
+\input{src/tex/cover_en}
+
+\tableofcontents
+
+% Ab erstem Kapitel Seiten arabisch zählen
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\clearpage
+
+\input{src/tex/intro}
+
+\input{src/tex/theft_detection}
+
+\input{src/tex/data}
+
+\input{src/tex/architecture}
+
+\input{src/tex/results}
+
+\input{src/tex/conclusion}
+
+\input{src/tex/future_work}
+
+
+
+\section{Use Cases}
+\section{Workflow}
+\subsection{GPS Data}
+\subsection{Accelerometer}
+\subsection{FMS Data}
+\section{Architecture}
+\chapter{Results}
+\chapter{Conclusion}
+\chapter{Future Work}
+
+\end{document}
