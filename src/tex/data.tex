@@ -1,6 +1,42 @@
 \section{The Data Sources}
 
-\subsection{GPS}
+Based on our algorithm idea represented by the decision tree, we knew which data we need to implement the theft detection. In this chapter, we discuss in more detail how we extracted these data from the vehicle and encapsulated it in our code.
+
 \subsection{Accelerometer}
+The first data source we used was the vehicle accelerometer which emits the current acceleration in X, Y and Z direction every 100ms by default. We chose to extract these data first because it can be used to implement a simple but effective theft detection already. Every illegal movement of the device (and thus vehicle) will be reflected in the accelerometer data.
+
+In order to get access to the accelerometer data, we used a C++ library dedicated to the BMA255 accelerometer\footnote{\url{https://www.bosch-sensortec.com/bst/products/all_products/bma255}} built into the test devices. The basic procedure to read data from it is as follows:
+
+\begin{enumerate}
+	\item Open connection via \texttt{open("/dev/bma255", O\_RDWR)}
+	\item Use the \texttt{select()} and \texttt{FD\_ISSET()} functions to check if data can be read from the file descriptor
+	\item Read the available data via \texttt{int numberRead = read(accelerationHandle, buffer, length - 1);} with a buffer of the right size
+\end{enumerate}
+
+We can parse the resulting data to retrieve the X, Y and Z acceleration. Naturally, reading has to occur continuously to read the current values. We decided to encapsulate the basic data access as above into a class \texttt{AccelerometerSensor} and add another proxy layer on top which persists the 5 most recent data points and calculates whether the vehicle is moving based on these. We adjusted the threshold until we were satisfied with the behavior but future work remains in this area.
+
+\subsection{GPS}
+In order to implement further layers of theft protection, we need to incorporate GPS data. This way, we can detect a theft if the vehicle is moving but the wheels are not spinning for example. To extract GPS data from the device, we used the GPSd daemon\footnote{\url{http://www.catb.org/gpsd/}} for C/C++. The procedure to access the data uses file descriptors again and is thus similar to the accelerometer.
+
+GPSd provided various values of which we only need a small subset. Thus, we encapsulated the values we need into a \texttt{gps\_data} struct to constrain the thousands of values provided by FMS to those we need and increase performance. Also, we again added another proxy layer which calculates the distance between two data points from GPS and decides whether the vehicle is moving.
+
 \subsection{FMS}
+For commercial vehicles, additional data from the Fleet Management System (FMS) is available. This can be used e.g. to check whether a valid driver card has been inserted (indicating that the designated driver is present) or not (indicating that the vehicle is moving without its driver). All relevant data for our algorithm are:
+
+\begin{itemize}
+	\item \textbf{The FMS status} to check whether FMS is currently not connected or online
+	\item \textbf{The battery ECU power state} to check if a trailer is connected to its truck or not
+	\item \textbf{The vehicle ID} to verify with a whitelist
+	\item \textbf{The engine speed} to see whether the engine is running or not
+	\item \textbf{The wheel-based speed} to decide whether the wheels are spinning or not
+	\item \textbf{The driver card state} to check whether a valid driver card is present or not
+	\item \textbf{The driver status} to check whether the driver is currently not at work, working, on a break, etc.
+\end{itemize}
+
+Again, we encapsulated these values we need into a struct called \texttt{fms\_data} to constrain the thousands of values provided by FMS to those we need. This also acts as documentation for which values are used and transmitted across the classes. For FMS, we do not need a proxy class because we only need the actual values coming directly from FMS.
+
+\vspace{.5cm}
+
+For all data access, we made sure to open the connection only once, then continuously read data, and then close the connection in the destructors of the appropriate classes. Also, we refactored our architecture to use singletons for the accelerometer and GPS sensor classes because we really only need one instance of both and this can prevent accidental use of copy constructors.
+
 \clearpage
