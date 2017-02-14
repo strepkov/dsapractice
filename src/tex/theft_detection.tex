@@ -2,7 +2,11 @@
 
 \section{Use Cases}
 
-TODO
+\begin{figure} [h]
+    \includegraphics[clip, trim=0.1cm 0.1cm 0.1cm 0.1cm, width=1\textwidth]{src/pic/UseCase}
+    \caption{Use Cases}
+    \label{UseCases}
+\end{figure}
 
 \section{Workflow}
 The algorithm works on a principle of the decision tree and it can be used for detecting a theft of either a car/truck or a trailer. Based on the information whether the specific data is available, the different path in the tree is selected and consequently, the decision is made. Since the use cases for trailer and truck are different, the algorithm will be explained for both cases independently.\\
@@ -13,6 +17,29 @@ The GPS/accelerometer sensors answer the first important decision question in th
 Moreover, if the driver cards are used in a company, the case when the engine is on can be extended in order to provide a more precise outcome. If a driver card is not required, it is checked whether the driver is on a job. If so, it is expected that the driver is in a vehicle, otherwise, the theft is identified. On the other hand, if the driver card is required, information on whether it is an invalid or a valid driver distinguishes between a theft and a regular situation. \\
 In section 2.3 it will be explained thoroughly how the main data sources are used.
 
+\begin{figure} [h]
+    \includegraphics[clip, trim=0.1cm 0.1cm 0.1cm 0.1cm, width=1\textwidth]{src/pic/DecisionTree}
+    \caption{Decision tree}
+    \label{DecisionTree}
+\end{figure}
+
+\begin{figure} [h]
+    \includegraphics[clip, trim=0.1cm 0.1cm 0.1cm 0.1cm, width=1\textwidth]{src/pic/DecisionTreeTop}
+    \caption{Decision tree top}
+    \label{DecisionTreeTop}
+\end{figure}
+
+\begin{figure} [h]
+    \includegraphics[clip, trim=0.1cm 0.1cm 0.1cm 0.1cm, width=1\textwidth]{src/pic/DecisionTreeTrailer}
+    \caption{Decision tree trailer}
+    \label{DecisionTreeTrailer}
+\end{figure}
+
+\begin{figure} [h]
+    \includegraphics[clip, trim=0.1cm 0.1cm 0.1cm 0.1cm, width=1\textwidth]{src/pic/DecisionTreeCar}
+    \caption{Decision tree car}
+    \label{DecisionTreeCar}
+\end{figure}
 
 
 \clearpage
