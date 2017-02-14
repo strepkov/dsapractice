@@ -21,7 +21,8 @@ In order to implement further layers of theft protection, we need to incorporate
 GPSd provided various values of which we only need a small subset. Thus, we encapsulated the values we need into a \texttt{gps\_data} struct to constrain the thousands of values provided by FMS to those we need and increase performance. Also, we again added another proxy layer which calculates the distance between two data points from GPS and decides whether the vehicle is moving.
 
 \subsection{FMS}
-For commercial vehicles, additional data from the Fleet Management System (FMS) is available. This can be used e.g. to check whether a valid driver card has been inserted (indicating that the designated driver is present) or not (indicating that the vehicle is moving without its driver). All relevant data for our algorithm are:
+\label{sec::FMSUse}
+For commercial vehicles, additional data from the Fleet Management System (FMS) is available (see section \ref{sec::FMSDef}). This can be used e.g. to check whether a valid driver card has been inserted (indicating that the designated driver is present) or not (indicating that the vehicle is moving without its driver). All relevant data for our algorithm are:
 
 \begin{itemize}
 	\item \textbf{The FMS status} to check whether FMS is currently not connected or online
