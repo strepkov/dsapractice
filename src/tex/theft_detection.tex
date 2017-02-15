@@ -2,11 +2,16 @@
 
 \section{Use Cases}
 
+We want to implement an algorithm which detects if a vehicle is stolen. Therefore we shortly explain the use cases we thought of. The user of the system wants to check if a theft alert is triggered via Portal (see section \ref{sec::Portal}). 
+Figure \ref{fig::useCase} shows an overview of the use cases.
+
 \begin{figure} [h]
     \includegraphics[clip, trim=0.1cm 0.1cm 0.1cm 0.1cm, width=1\textwidth]{src/pic/UseCase}
     \caption{Use Cases}
-    \label{UseCases}
+    \label{fig::useCase}
 \end{figure}
+
+We distinct between teft detection for a car or truck and a trailer only because VCGs are often build in trailers. Depending on those configurations we have different data available which have to be considered in the implementation.
 
 
 \section{Algorithm}
