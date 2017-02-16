@@ -1,8 +1,13 @@
 \chapter{Evaluation}
 
-%TODO
-What are the results? \\
-Whats works good? \\
-Where are weaknesses in the algorithm? (Stolen vehicle with key) 
+% What are the results?
+% Whats works good?
+At the end of the workshop, we were able to have our algorithm idea implemented. Due to the timeframe of the workshop, we were only able to manually test the essential functions, i.e. theft detection via the accelerometer and suspicious GPS movements. As soon as the device is moved (e.g. lifted up from a table), the accelerometer-based detection correctly fired. Additionally, we field-tested the GPS-based detection by running down the street to simulate a noticeable change in location.
+
+However, in the scope of the workshop, much of the FMS data was not available. Thus, not all branches from our decision tree could be tested. This could have been achieved by simulating the FMS data. However, we did not have the necessary time left towards the end of the workshop.
+
+% Where are weaknesses in the algorithm? (Stolen vehicle with key)
+Theft detection is a challenging problem. Even though all the different branches in our decision cover many possible ways to steal a vehicle, there are cases which are not covered -- and cases that are hard to detect in general. This includes the case where a thief has gained access to the vehicle keys, thus leaving no way to detect a theft in non-commercial vehicles (which do not require a driver card).
+
 
 \clearpage
