@@ -1,15 +1,26 @@
 \chapter{Conclusion and Future Work}
+
 Our concept and the implementation on the VCG show, that a theft detection for a vehicle or a trailer - equipped with a VCG - is realizable and that even basic concepts can be used for this safety-critical use case. With the help of our tests we can say, that our approach is working under testing conditions. But in our program, only basic functions for theft detection are implemented, which are necessary for the correct operation of the program. Still, some weak points remain which can be improved in the future. These points are:
 
-\begin{itemize}
-	\item Use binary mode to read from acceleration sensor to avoid parsing the data manually as a string
-	\item Calibrate acceleration sensor threshold based on in-the-field testing (e.g. beside a highway)
-	\item Test all branches of the algorithm, ideally with real vehicle data
-\end{itemize}
+%\begin{itemize}
+	%\item Use binary mode to read from acceleration sensor to avoid parsing the data manually as a string to simplify the code.
+	%\item Calibrate the acceleration sensor threshold based on in-the-field testing (e.g. beside a highway) to make sure it emits minimal false positives (theft detected although the vehicle is in fact not stolen) while still reporting all true positives.
+	%\item Test all branches of the algorithm, ideally with a real vehicle data in order to ensure the correctness of the algorithm and the implementation.
+%\end{itemize}
 
-The problem with parsing the data is, that the algorithm could not react on wrong input data or detect an knock event at the moment. A knock event is send by the box, if someone knocks on it. Wrong input data could occur, if the connection to the sensor is disturbed or the sensor is damaged. In these cases, the algorithm throws an exception, because it can not handle the data. The binary mode can solve these problems. Anther weak point is the threshold of the acceleration sensor. The threshold is generated from data, which was measured while the box was lying on a table, so that there weren't any disturbing factors. In a real environment are many vibrations and disturbing signals, so that the threshold will be to low. But the exact threshold has to be measured during an field test. A test inside a trailer on a rest area near a highway will be quite useful, because other trucks will pass the test arrangement with a high speed and will generate lots of vibrations. The last problem, which occurs during the workshop, was, that the FMS system was not working correctly. It had only dummy data for some values. These tests have to be repeated under real conditions with a working FMS system and real vehicle data to make sure, that everything of the algorithm works correctly.
+\section{Shortcomings}
 
-In addition to that issues, there are two concrete ideas for an improved theft detection algorithm. The first approach is an extended geofencing. In our concept, the geofencing is only used for the detection, if a trailer is inside a loading area, for example a train station or a harbor. But there are different use cases, where the trailer is moving and it is not a theft. Examples are a trailer loaded on a train or a ship. Therefore, the geofencing can be extended on railroad lines or ship routes. Another idea is to deactivate the theft detection during the transport. The second improvement for our algorithm is the usage of information from the portal. The portal delivers information about the working time of the drivers. Combined with the truck, an improved algorithm could check, if the truck or truck/trailer combination is moving, although the responsible driver for the truck is currently not working. 
+The code should use binary mode to read from the acceleration sensor to avoid parsing the data manually as a string. The problem with parsing the data is, that the algorithm could not react on wrong input data or detect an knock event at the moment. A knock event is send by the box, if someone knocks on it. Wrong input data could occur, if the connection to the sensor is disturbed or the sensor is damaged. In these cases, the algorithm throws an exception, because it cannot handle the data. The binary mode can solve these problems.
+
+Another weak point is the threshold of the acceleration sensor. The threshold is generated from data, which was measured while the box was lying on a table, so that there were not any disturbing factors. In a real environment are many vibrations and disturbing signals, so that the threshold will be to low. But the exact threshold has to be measured during an field test. A test inside a trailer on a rest area near a highway will be quite useful, because other trucks will pass the test arrangement with a high speed and will generate lots of vibrations.
+
+The last problem, which occurs during the workshop, was, that the FMS system was not working correctly. It had only dummy data for some values. These tests have to be repeated under real conditions with a working FMS system and real vehicle data to make sure, that everything of the algorithm works correctly.
+
+\section{Improvement Ideas}
+
+In addition to these issues, there are two concrete ideas for an improved theft detection algorithm. The first approach is an extended geofencing. In our concept, the geofencing is only used for the detection, if a trailer is inside a loading area, for example a train station or a harbor. But there are different use cases, where the trailer is moving and it is not a theft. Examples are a trailer loaded on a train or a ship. Therefore, the geofencing can be extended on railroad lines or ship routes. Another idea is to deactivate the theft detection during the transport.
+
+The second improvement for our algorithm is the usage of information from the portal. The portal delivers information about the working time of the drivers. Combined with the truck, an improved algorithm could check, if the truck or truck/trailer combination is moving, although the responsible driver for the truck is currently not working. 
 
 These two issues and the two ideas show, that there are several improvements for our concept, which can be designed and implemented in future work.
 

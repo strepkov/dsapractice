@@ -1,9 +1,9 @@
 \section{Data Sources}
 
-Based on our algorithm idea represented by the decision tree, we knew which data we need to implement the theft detection. In this chapter, we discuss in more detail how we extracted these data from the vehicle and encapsulated it in our code.
+Based on our algorithm idea represented by the decision tree, we knew which data we needed to implement our theft detection algorithm. In this chapter, we discuss in more detail how we extracted the data from the vehicle and encapsulated it in our code.
 
 \subsection{Accelerometer}
-The first data source we used was the vehicle accelerometer which emits the current acceleration in X, Y and Z direction every 100ms by default. We chose to extract these data first because it can be used to implement a simple but effective theft detection already. Every illegal movement of the device (and thus vehicle) will be reflected in the accelerometer data.
+The first data source we used was the vehicle accelerometer which emits the current acceleration in X, Y and Z direction every 100ms by default. We chose to extract this data first because it can be used to implement a simple but effective theft detection already. Every illegal movement of the device (and thus vehicle) will be reflected in the accelerometer data.
 
 In order to get access to the accelerometer data, we used a C++ library dedicated to the BMA255 accelerometer\footnote{\url{https://www.bosch-sensortec.com/bst/products/all_products/bma255}} built into the test devices. The basic procedure to read data from it is as follows:
 
@@ -40,4 +40,3 @@ Again, we encapsulated these values we need into a struct called \texttt{fms\_da
 
 For all data access, we made sure to open the connection only once, then continuously read data, and then close the connection in the destructors of the appropriate classes. Also, we refactored our architecture to use singletons for the accelerometer and GPS sensor classes because we really only need one instance of both and this can prevent accidental use of copy constructors.
 
-\clearpage

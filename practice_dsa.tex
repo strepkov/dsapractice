@@ -11,7 +11,9 @@
 \usepackage{pdfpages}
 \usepackage[strict]{changepage}
 \usepackage{indentfirst}
-\usepackage{hyperref}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
+\usepackage{rotating}
+\usepackage{breakcites}
 
 \pdfoptionpdfminorversion=6
 
@@ -103,6 +105,7 @@
 \input{src/tex/evaluation}
 
 \input{src/tex/future_work}
+
 
 \bibliographystyle{alpha}
 \addcontentsline{toc}{chapter}{Bibliography}

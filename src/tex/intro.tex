@@ -1,24 +1,30 @@
 \chapter{Introduction}
 
-In the context of the lecture \textit{Applied Software Engineering within the life cycle of Automotive Electronics} hold by \textit{Dr. Ansgar Schleicher} at \textit{RWTH Aachen University} we took part at a workshop organized by \textit{DSA - Daten- und Systemtechnik GmbH} \cite{DSA}.
-The workshop was devided into two seperate topics: Extending the web \textit{portal BetoTrack} and the development of new functions for \textit{Vehicle Connectivity Gateway (VCG)} devices \cite{WorkshopDescription}. Within the VCG area we were allowed to choose between 3 different use cases: 
+A telematics and diagnostics device such as the VCG (Vehicle Connectivity Gateway) can be used to connect a vehicle with a remote portal. This allows exchanging crucial vehicle information as well as invoking vehicle functions remotely. Vehicle information is accessed by the VCG through its integration into the vehicle's CAN or Ethernet bus, and data is then sent via GSM/UMTS. 
+
+In the context of the lecture \textit{Applied Software Engineering within the life cycle of Automotive Electronics} held by \textit{Dr. Ansgar Schleicher} at \textit{RWTH Aachen University} we took part at a workshop organized by \textit{DSA - Daten- und Systemtechnik GmbH} \cite{DSA}.
+
+The workshop was devided into two seperate topics: Extending the web \textit{portal BetoTrack} and the development of new functions for \textit{Vehicle Connectivity Gateway (VCG)} devices. Within the VCG area we chose between 3 different use cases: 
 \begin{enumerate}
     \item Collision detection
     \item Theft detection
     \item Dead reckoning
 \end{enumerate} 
-At the workshop, we worked in the area of VCG development. We have decided to implement "Theft detection" use case because in our opinion it's the most interesting and useful case. In Germany, every 30 minutes had been stolen one car in 2014. 
+At the workshop, we worked in the area of VCG development. We have decided to implement the "Theft detection" use case because in our opinion it is the most interesting and useful case.
+% TODO: reference for this?
+% In Germany, every 30 minutes had been stolen one car in 2014. 
 
 Dead reckoning was a interesting topic we wanted to work on first. The downside was that many dead reckoning algorithms rely on sensors which are not available in the VCG (see section \ref{sec::vcg}). Dead reckoning often uses sensors like a compass and gyroscope to estimate the direction of movement \cite{kao1991integration}. Because of this we decided not to work at this topic.
 
-The goal was to implement a C++ program which detects an attempted theft and reports it. We have used the preconfigured VirtualBox virtual machine with Eclipse IDE and the partially implemented project. We had to implement additional functional for the project, depending on the chosen use case.  The main device which we used to receive data for our program was VCG device. It provides functions like: 
+The goal was to implement a C++ program which detects an attempted theft and reports it. The main device which we used to receive data for our program was VCG device. Such telematics devices support functions like: 
 \begin{enumerate}
-	\item Location-Based functions : location and tracking of vehicles 
-	\item Functions and status monitoring:  monitoring a status of vehicle, onboard diagnostic
-	\item Update services : update some firmware
-	\item Entertainment and communication services : access to the data in the cloud and communication services
-	\item Safety functions : check of safety-relevant vehicle functions or crash-detection
-	\item Predictive Maintenance : continuous recording of vehicle behaviour and sending data to central service for analysis and initiation of maintenance activity.
+	\item Location-based functions: location and tracking of vehicles 
+	\item Function and status monitoring:  monitoring a status of vehicle, onboard diagnostic
+	\item Update services: update some firmware
+	\item Entertainment and communication services: access to the data in the cloud and communication services
+	\item Safety functions: check of safety-relevant vehicle functions or crash-detection
+	\item Predictive Maintenance: continuous recording of vehicle behaviour and sending data to central service for analysis and initiation of maintenance activity.
 \end{enumerate}
-For our purpose, we have used the acceleration sensor of the VCG, the GPS sensor, and information from FMS. We used WIFI network of VCG device to send compiled a program to VCG and receive information from it.\\
-Our team consisted of 5 people and for higher efficiency, we decided to split the team into two sub-teams. First one worked on an algorithm of stealing detection and second team tried to get necessary data from the device. We applied pair-programming technic to achieve the better quality of the program.\\
+For our purpose, we have used the acceleration sensor of the VCG, the GPS sensor, and information from the FMS (Fleet Management System). We used the Wifi network of the VCG device to transmit our executable to it and receive information from it.
+
+Our team consisted of 5 people and for higher efficiency, we decided to split the team into two sub-teams. The first one worked on an algorithm for theft detection and second team tried to get the necessary data from the device. We applied pair-programming to achieve a better quality of the program.

@@ -1,6 +1,6 @@
-\chapter{Used technology}
+\chapter{Used Technologies}
 
-This chapter briefly describes the used technologies to implement a theft detection algorithm for vehicles. It introduces the Vehicle Connectivity Gateway and its web application Portal BetoTrack. After this the FMS standard is summarized.
+This chapter briefly describes the used technologies to implement a theft detection algorithm for vehicles. It introduces the VCG and its web portal BetoTrack. After this, the FMS standard is summarized.
 
 \section{Vehicle Connectivity Gateway}
 \label{sec::vcg}
@@ -22,12 +22,12 @@ The VCG provides multiple communication mechanisms to transport data from the ve
     \item CAN and Ethernet for ECU communication and diagnostics
 \end{itemize}
 
-Additionally the device has an build in accelerometer and build in battery to be independent of a vehicles power supply. We use the VCG to detect a theft of vehicles.
+Additionally the device has a built-in accelerometer and built-in battery to be independent of a vehicles power supply. We use the VCG to detect a theft of vehicles.
 
 \section{Portal BetoTrack}
 \label{sec::Portal}
 
-Portal BetoTrack is a tracking web application which allows to track vehicles equipped with VCGs. The app can be displayed in a browser an shows different states of a vehicle \cite{BetoTrack}. 
+Portal BetoTrack is a tracking web application which allows to track vehicles equipped with VCGs. The portal can be displayed in a browser and shows the states of different vehicles connected to the portal \cite{BetoTrack}.
 In context of this workshop the theft detection results should be displayed in this portal. The implementation of this was done by other groups of the workshop.
 
 \begin{figure}[h]
@@ -43,7 +43,8 @@ The communication over the vehicle's CAN bus is standardized by the SAE J1939 ne
 FMS includes the following sensor values \cite{FMSStd}:
 
 \begin{itemize}
-    \item Vehicle improvement (all round)
+	% TODO: What was meant by vehicle improvement?
+    %\item Vehicle improvement (all round)
     \item Vehicle speed (wheel based)
     \item Vehicle speed (from tachograph)
     \item Clutch switch (on/off)
@@ -64,7 +65,7 @@ FMS includes the following sensor values \cite{FMSStd}:
     \item Engine coolant temperature
 \end{itemize}
 
-Additional in version 2.0 the following values are also supported:
+Additionally, in version 2.0 the following values are also supported:
 \begin{itemize}
     \item Environment temperature
     \item Driver ID
