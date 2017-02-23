@@ -55,3 +55,21 @@ In section 2.3 it will be explained thoroughly how the main data sources are use
     \label{fig::decisionTreeCar}
 \end{figure}
 
+\subsection{Moving Detection}
+
+We use for our moving detection approach two different ideas for the different technologies. The moving detection of the acceleration sensors works with the help of an threshold. We gathered some data from a box, which was lying on a table, and during shaking a box. We visualized the data, which can be seen in Figure \ref{fig::AccelDetection}. The graph shows the acceleration in hundredths of $\frac{m}{s^{2}}$ over the time. The input signal has some jitter. Therefore, we average it over the last five data points. This is shown in the graph via the red dotted line. The average is below 2.5, so we set the threshold to 2.5 (orange line). During the shaking of the box the average increases over 2.5, so that the algorithm will detect a moving of the box. The sliding window of the average has a variable buffer size. Currently, the buffer size is set to five.
+
+For the calculating a moving detection on basis of the GPS signal another approach is used, because the signal has a varying derivation. The algorithm checks for every GPS point in the buffer, if it is inside the maximum of both derivations (the derivation of the current considered point from the buffer and the new measured point) or not. This is visualized in Figure \ref{fig::GPSDetection}. We use the maximum of both derivations, because the derivation changes over time caused by the GPS signal quality, so that we can exclude, that the algorithm generates a false negative. This can happen, if on signal out of the buffer has a very bad quality and a huge derivation and the currently measured signal has a good quality and a low derivation. The buffer is implemented as a ring buffer, where the newest element overrides the oldest. The size is currently set to 600 by a measuring rate of one second. It allows the algorithm to detect movements over the last 10 minutes.
+
+\begin{figure} [h]
+    \includegraphics[clip, trim=0.1cm 0.1cm 0.1cm 0.1cm, width=1\textwidth]{src/pic/threshold}
+    \caption{Data for determining the threshold for the acceleration sensor}
+    \label{fig::AccelDetection}
+\end{figure}
+
+\begin{figure} [h]
+    \includegraphics[clip, trim=0.1cm 0.1cm 0.1cm 0.1cm, width=0.7\textwidth]{src/pic/gps_data}
+    \caption{Moving detection via GPS}
+    \label{fig::GPSDetection}
+\end{figure}
+
