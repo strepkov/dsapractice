@@ -5,7 +5,7 @@ Based on our algorithm idea represented by the decision tree, we knew which data
 \subsection{Accelerometer}
 The first data source we used was the vehicle accelerometer which emits the current acceleration in X, Y and Z direction every 100ms by default. We chose to extract this data first because it can be used to implement a simple but effective theft detection already. Every illegal movement of the device (and thus vehicle) will be reflected in the accelerometer data.
 
-In order to get access to the accelerometer data, we used a C++ library dedicated to the BMA255 accelerometer\footnote{\url{https://www.bosch-sensortec.com/bst/products/all_products/bma255}} built into the test devices. The basic procedure to read data from it is as follows:
+In order to get access to the accelerometer data, we used a C++ library dedicated to the BMA255 accelerometer \cite{BMA255} built into the test devices. The basic procedure to read data from it is as follows:
 
 \begin{enumerate}
 	\item Open connection via \texttt{open("/dev/bma255", O\_RDWR)}
@@ -16,7 +16,7 @@ In order to get access to the accelerometer data, we used a C++ library dedicate
 We can parse the resulting data to retrieve the X, Y and Z acceleration. Naturally, reading has to occur continuously to read the current values. We decided to encapsulate the basic data access as above into a class \texttt{AccelerometerSensor} and add another proxy layer on top which persists the 5 most recent data points and calculates whether the vehicle is moving based on these. We adjusted the threshold until we were satisfied with the behavior but future work remains in this area.
 
 \subsection{GPS}
-In order to implement further layers of theft protection, we need to incorporate GPS data. This way, we can detect a theft if the vehicle is moving but the wheels are not spinning for example. To extract GPS data from the device, we used the GPSd daemon\footnote{\url{http://www.catb.org/gpsd/}} for C/C++. The procedure to access the data uses file descriptors again and is thus similar to the accelerometer.
+In order to implement further layers of theft protection, we need to incorporate GPS data. This way, we can detect a theft if the vehicle is moving but the wheels are not spinning for example. To extract GPS data from the device, we used the GPSd daemon \cite{GPSd} for C/C++. The procedure to access the data uses file descriptors again and is thus similar to the accelerometer.
 
 GPSd provided various values of which we only need a small subset. Thus, we encapsulated the values we need into a \texttt{gps\_data} struct to constrain the thousands of values provided by FMS to those we need and increase performance. Also, we again added another proxy layer which calculates the distance between two data points from GPS and decides whether the vehicle is moving.
 
